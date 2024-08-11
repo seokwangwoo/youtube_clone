@@ -1,0 +1,16 @@
+{
+  "name": "youtube_clone",
+  "version": "1.0.0",
+  "description": "Cloned youtube",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seokwangwoo/youtube_clone.git"
+  },
+  "author": "Seo Kwangwoo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seokwangwoo/youtube_clone/issues"
+  },
+  "homepage": "https://github.com/seokwangwoo/youtube_clone#readme"
+}

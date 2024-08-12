@@ -7,10 +7,22 @@
     "type": "git",
     "url": "git+https://github.com/seokwangwoo/youtube_clone.git"
   },
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server.js"
+  },
   "author": "Seo Kwangwoo",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/seokwangwoo/youtube_clone/issues"
   },
-  "homepage": "https://github.com/seokwangwoo/youtube_clone#readme"
+  "homepage": "https://github.com/seokwangwoo/youtube_clone#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/node": "^7.25.0",
+    "@babel/preset-env": "^7.25.3",
+    "nodemon": "^3.1.4"
+  }
 }

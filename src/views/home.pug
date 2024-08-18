@@ -1,4 +1,11 @@
 extends base.pug
+include mixins/video.pug
 
-block content 
-    h1 Hi This is #{pageTitle}
+block content
+  h2 Welcome!
+  each potato in videos 
+    +video(potato)
+  else
+    li Nothing found.
+
+  a(href="videos/upload") Upload video

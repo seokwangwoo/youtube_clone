@@ -10,4 +10,18 @@ block content
       required,
       type="text"
     )
+    input(
+      name="description",
+      placeholder="Description",
+      required,
+      type="text",
+      value=video.description
+    )
+    input(
+      name="hashtags",
+      placeholder="Hashtags",
+      required,
+      type="text",
+      value=video.hashtags.join()
+    )
     input(value="Save", type="submit")

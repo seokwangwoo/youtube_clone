@@ -8,7 +8,8 @@
     "url": "git+https://github.com/seokwangwoo/youtube_clone.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec ts-node src/init.ts",
+    "build": "tsc"
   },
   "author": "Seo Kwangwoo",
   "license": "MIT",
@@ -27,8 +28,12 @@
     "@babel/node": "^7.25.0",
     "@babel/preset-env": "^7.25.3",
     "@prettier/plugin-pug": "^3.0.0",
+    "@types/express": "^4.17.21",
+    "@types/morgan": "^1.9.9",
     "nodemon": "^3.1.4",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   },
   "prettier": {
     "plugins": [

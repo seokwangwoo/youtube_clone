@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { Video, VideoDocument } from "../models/Video";
 
 export const home: RequestHandler = async (req, res) => {
-  const videos = await Video.find({});
+  const videos = await Video.find({}).sort({ createdAt: "desc" });
   res.render("home", { pageTitle: "Home", videos });
 };
 
@@ -44,17 +44,19 @@ export const postEdit: RequestHandler = async (req, res) => {
   return res.redirect(`/videos/${id}`);
 };
 
-export const search: RequestHandler = (req, res) => {
-  return res.send("search video");
+export const search: RequestHandler = async (req, res) => {
+  const { keyword } = req.query;
+  let matched = [];
+  if (keyword) {
+    matched = await Video.find({
+      title: { $regex: new RegExp(`${keyword}`, "i") },
+    });
+  }
+  return res.render("search", { pageTitle: "Results", videos: matched });
 };
 
 export const getUpload: RequestHandler = (req, res) => {
   res.render("upload", { pageTitle: "Upload Video" });
-};
-
-export const deleteVideo: RequestHandler = (req, res) => {
-  console.log(req.params);
-  return res.send("Delete video");
 };
 
 export const postUpload: RequestHandler = async (req, res) => {
@@ -72,4 +74,10 @@ export const postUpload: RequestHandler = async (req, res) => {
       errorMessage: error._message,
     });
   }
+};
+
+export const deleteVideo: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+  await Video.findByIdAndDelete(id);
+  return res.redirect("/");
 };

@@ -77,11 +77,23 @@ export const postLogin: RequestHandler = async (req, res) => {
 };
 
 export const getEdit: RequestHandler = (req, res) => {
-  return res.send("edit user");
+  return res.render("users/edit-profile", { pageTitle: "Edit Profile" });
 };
 
-export const postEdit: RequestHandler = (req, res) => {
-  return res.send("edit user");
+export const postEdit: RequestHandler = async (req, res) => {
+  const { name, location }: UserDocument = req.body;
+  const session = req.session as any;
+  const updateUser = await User.findByIdAndUpdate(
+    session.user._id,
+    {
+      name,
+      location,
+      avatarUrl: `/${req.file?.path}`,
+    },
+    { new: true },
+  );
+  session.user = updateUser;
+  return res.redirect("/users/edit");
 };
 
 export const remove: RequestHandler = (req, res) => {
@@ -97,9 +109,15 @@ export const logout: RequestHandler = (req, res) => {
   return res.redirect("/");
 };
 
-export const see: RequestHandler = (req, res) => {
-  console.log(req.params);
-  return res.send("Watch");
+export const userProfile: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id).populate("videos");
+  console.log(user);
+  if (!user) {
+    return res.status(404).render("404", { pageTitle: "User not found" });
+  }
+
+  return res.render("users/profile", { pageTitle: "Profile", user });
 };
 
 export const startGithubLogin: RequestHandler = (req, res) => {
@@ -167,7 +185,7 @@ export const finishGithubLogin: RequestHandler = async (req, res) => {
         avatarUrl: userDataJson.avatar_url,
         email: emailObj.email,
         username: userDataJson.login,
-        password: null,
+        password: "",
         socialOnly: true,
         location: userDataJson.location,
       });
@@ -183,4 +201,41 @@ export const finishGithubLogin: RequestHandler = async (req, res) => {
       errorMessage: "Error in Github Authorization.",
     });
   }
+};
+
+export const getChangePassword: RequestHandler = (req, res) => {
+  const session = req.session as any;
+  if (session.user.socialOnly === true) {
+    return res.redirect("/users/edit");
+  }
+
+  return res.render("users/change-password", {
+    pageTitle: "Change Password",
+  });
+};
+
+export const postChangePassword: RequestHandler = async (req, res) => {
+  const { oldPassword, newPassword, newPassword2 } = req.body;
+  const session = req.session as any;
+  const user = await User.findById(session.user._id);
+
+  const match = await bcrypt.compare(oldPassword, user.password);
+  if (!match) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The current password is incorrect.",
+    });
+  }
+
+  if (newPassword !== newPassword2) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The password does not match the confirmation.",
+    });
+  }
+
+  user.password = newPassword;
+  session.user = await user.save();
+
+  return res.redirect("/users/logout");
 };

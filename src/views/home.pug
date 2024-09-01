@@ -1,13 +1,13 @@
 extends base.pug
-include mixins/video.pug
+include mixins/video
 
 block content
   h2 Welcome!
   form(action="/search", method="GET")
     input(placeholder="Search by title", name="keyword", type="text")
     input(type="submit", value="Search")
-  each vid in videos 
-    +video(vid)
+  each video in videos 
+    +video(video)
   else
     li Nothing found.
 

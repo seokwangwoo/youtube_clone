@@ -10,6 +10,7 @@ export interface UserDocument extends Document {
   avatarUrl?: string;
   socialOnly?: boolean;
   location?: string;
+  videos?: string[];
 }
 
 export interface UserModel extends Model<UserDocument> {}
@@ -22,14 +23,13 @@ const userSchema = new Schema({
   password: { type: String },
   name: { type: String, required: true },
   location: { type: String },
-});
-
-userSchema.static("hashPassword", async function (password: string) {
-  return await bcrypt.hash(password, 5);
+  videos: [{ type: Schema.Types.ObjectId, ref: "Video" }],
 });
 
 userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 5);
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 5);
+  }
 });
 
 export const User = model<UserDocument, UserModel>("User", userSchema);

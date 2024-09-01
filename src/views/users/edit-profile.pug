@@ -1,0 +1,26 @@
+extends ../base
+
+block content
+  form(method="POST", enctype="multipart/form-data")
+    label(for="avatar") Avatar
+    if (loggedInUser.avatarUrl)
+      img(
+        src=`${loggedInUser.avatarUrl}`,
+        width="100",
+        height="100",
+        alt="alt"
+      )
+    input#avatar(type="file", name="avatar", accept="image/*")
+    label(for="name") Name
+    input(name="name", type="text", required, value=`${loggedInUser.name}`) 
+    label(for="location") Location
+    input(
+      name="location",
+      type="text",
+      required,
+      value=`${loggedInUser.location}`
+    ) 
+    input(type="submit", value="Update Profile")
+    hr
+    if (!loggedInUser.socialOnly)
+      a(href="change-password") Change Password

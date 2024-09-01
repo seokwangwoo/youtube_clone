@@ -7,6 +7,8 @@ export interface UserDocument extends Document {
   password: string;
   password2: string;
   name: string;
+  avatarUrl?: string;
+  socialOnly?: boolean;
   location?: string;
 }
 
@@ -14,8 +16,10 @@ export interface UserModel extends Model<UserDocument> {}
 
 const userSchema = new Schema({
   username: { type: String, required: true, trim: true, unique: true },
+  avatarUrl: { type: String },
+  socialOnly: { type: Boolean, default: false },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  password: { type: String },
   name: { type: String, required: true },
   location: { type: String },
 });

@@ -5,6 +5,5 @@ export const localMiddleware: RequestHandler = (req, res, next) => {
   res.locals.loggedIn = Boolean(session.loggedIn);
   res.locals.siteName = "Wetube";
   res.locals.loggedInUser = session.user || {};
-  console.log(res.locals);
   next();
 };

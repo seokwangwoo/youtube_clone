@@ -30,7 +30,7 @@ export const publicOnlyMiddleware: RequestHandler = (req, res, next) => {
 export const uploadAvatarMiddleware = multer({
   dest: "uploads/avatars/",
   limits: {
-    fileSize: 3000,
+    fileSize: 3000000,
   },
 }).single("avatar");
 

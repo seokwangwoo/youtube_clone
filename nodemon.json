@@ -1,0 +1,5 @@
+{
+  "ignore": ["webpack.config.ts", "src/client/**", "dist/**"],
+  "exec": "ts-node src/init.ts",
+  "ext": "ts,js,pug"
+}

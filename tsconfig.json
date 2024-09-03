@@ -3,13 +3,14 @@
   "compilerOptions": {
     "outDir": "build",
     "target": "ES6",
-    "lib": ["ES6"],
+    "lib": ["ES6", "DOM"],
     "module": "CommonJS",
     "moduleResolution": "Node",
     "paths": {
       "express": ["./node_modules/express"]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
   "ts-node": {
     "files": true,

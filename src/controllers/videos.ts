@@ -4,7 +4,9 @@ import { User } from "../models/User";
 import { SchemaTypeOptions } from "mongoose";
 
 export const home: RequestHandler = async (req, res) => {
-  const videos = await Video.find({}).sort({ createdAt: "desc" });
+  const videos = await Video.find({})
+    .sort({ createdAt: "desc" })
+    .populate("owner");
   res.render("home", { pageTitle: "Home", videos });
 };
 
@@ -66,7 +68,7 @@ export const search: RequestHandler = async (req, res) => {
   if (keyword) {
     matched = await Video.find({
       title: { $regex: new RegExp(`${keyword}`, "i") },
-    });
+    }).populate("owner");
   }
   return res.render("search", { pageTitle: "Results", videos: matched });
 };

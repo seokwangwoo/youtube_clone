@@ -2,13 +2,18 @@ extends base.pug
 include mixins/video
 
 block content
-  h2 Welcome!
-  form(action="/search", method="GET")
-    input(placeholder="Search by title", name="keyword", type="text")
-    input(type="submit", value="Search")
-  each video in videos 
-    +video(video)
-  else
-    li Nothing found.
+  .video-grid
+    each video in videos 
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+      +video(video)
+    else
+      span.empty__message No video found.
 
   a(href="videos/upload") Upload video

@@ -1,0 +1,37 @@
+.search-results-mixin {
+  .search-results-mixin__container {
+    display: inline-flex;
+    width: 100%;
+    margin-bottom: 25px;
+    .search-results-mixin__thumb {
+      height: 280px;
+      border-radius: 10px;
+      width: 500px;
+      background-color: ivory;
+    }
+    .search-results-mixin__data {
+      padding: 5px 20px;
+      display: block;
+      .search-results-mixin__title {
+        font-size: 24px;
+      }
+      .search-results-mixin__meta {
+        .search-results-mixin__meta__views {
+          margin-top: 5px;
+          font-size: 14px;
+          color: darkgray;
+        }
+        .search-results-mixin__meta__username {
+          margin-top: 10px;
+          font-size: 14px;
+          color: darkgray;
+        }
+        .search-results-mixin__meta__description {
+          margin-top: 20px;
+          font-size: 16;
+          color: darkgray;
+        }
+      }
+    }
+  }
+}

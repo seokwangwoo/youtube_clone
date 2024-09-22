@@ -14,7 +14,11 @@
     }
     .video-mixin__meta {
       margin-top: 5px;
-      font-size: 12px;
+      font-size: 14px;
+      color: darkgray;
+      .video-mixin__meta__views {
+        margin-top: 5px;
+      }
     }
   }
 }

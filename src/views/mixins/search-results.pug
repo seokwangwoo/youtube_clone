@@ -1,0 +1,10 @@
+mixin search-results(video)
+  a.search-results-mixin(href=`/videos/${video._id}`)
+    .search-results-mixin__container
+      .search-results-mixin__thumb
+      .search-results-mixin__data
+        span.search-results-mixin__title= video.title
+        .search-results-mixin__meta
+          .search-results-mixin__meta__views #{ video.meta.views } view · #{ video.createdBefore }
+          .search-results-mixin__meta__username #{ video.owner.username }
+          .search-results-mixin__meta__description #{ video.description }

@@ -1,8 +1,8 @@
 mixin video(video)
-  a.video-mixin(href=`/videos/${video.id}`)
+  a.video-mixin(href=`/videos/${video._id}`)
     .video-mixin__thumb
     .video-mixin__data
       span.video-mixin__title= video.title
       .video-mixin__meta
-        span #{ video.owner.username }⠀·⠀
-        span #{ video.meta.views } view
+        .video-mixin__meta__username #{ video.owner.username }
+        .video-mixin__meta__views #{ video.meta.views } view · #{ video.createdBefore }

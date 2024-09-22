@@ -4,9 +4,17 @@ import { User } from "../models/User";
 import { SchemaTypeOptions } from "mongoose";
 
 export const home: RequestHandler = async (req, res) => {
-  const videos = await Video.find({})
+  const videoDatas = await Video.find({})
     .sort({ createdAt: "desc" })
     .populate("owner");
+
+  const videos = videoDatas.map((video) => {
+    return {
+      ...video.toObject(),
+      createdBefore: Video.formatCreatedBefore(video.createdAt),
+    };
+  });
+
   res.render("home", { pageTitle: "Home", videos });
 };
 
@@ -65,12 +73,19 @@ export const postEdit: RequestHandler = async (req, res) => {
 export const search: RequestHandler = async (req, res) => {
   const { keyword } = req.query;
   let matched = [];
+  let videos = [];
   if (keyword) {
     matched = await Video.find({
       title: { $regex: new RegExp(`${keyword}`, "i") },
     }).populate("owner");
+    videos = matched.map((video) => {
+      return {
+        ...video.toObject(),
+        createdBefore: Video.formatCreatedBefore(video.createdAt),
+      };
+    });
   }
-  return res.render("search", { pageTitle: "Results", videos: matched });
+  return res.render("search", { pageTitle: "Results", videos });
 };
 
 export const getUpload: RequestHandler = (req, res) => {

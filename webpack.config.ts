@@ -4,11 +4,14 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 const config: webpack.Configuration = {
   mode: "production",
-  entry: "./src/client/ts/main.ts",
+  entry: {
+    main: "./src/client/ts/main.ts",
+    videoPlayer: "./src/client/ts/videoPlayer.ts",
+  },
   watch: true,
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "js/main.js",
+    filename: "js/[name].js",
     clean: true,
   },
 

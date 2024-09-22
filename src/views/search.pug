@@ -1,16 +1,15 @@
 extends base
-include mixins/video.pug
+include mixins/search-results.pug
 
 block content
-  form.search__form(action="/search", method="GET")
-    input(placeholder="Search by title", name="keyword", type="text")
-    button(type="submit") 
-      i.fas.fa-search
-  .video-grid
+  .search
     each vid in videos 
-      +video(vid)
+      +search-results(vid)
+      +search-results(vid)
+      +search-results(vid)
+      +search-results(vid)
+      +search-results(vid)
+      +search-results(vid)
     else
       span.empty__message No video found.
       br
-
-  a(href="/") Back to home🏠

@@ -10,9 +10,13 @@
 @import "./components/form.scss";
 @import "./components/search-form.scss";
 @import "./components/search-results.scss";
+@import "./components/social-login.scss";
+@import "./components/avatar.scss";
 
 // Screens
 @import "./screens/home.scss";
+@import "./screens/profile.scss";
+@import "./screens/edit-profile.scss";
 
 // Defaults
 a {

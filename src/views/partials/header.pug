@@ -2,7 +2,11 @@ header
   a.header__logo(href="/")
     i.fab.fa-youtube
   form.search__form(action="/search", method="GET")
-    input(placeholder="Search by title", name="keyword", type="text")
+    input#search__input(
+      placeholder="Search by title",
+      name="keyword",
+      type="text"
+    )
     button(type="submit") 
       i.fas.fa-search
   nav
